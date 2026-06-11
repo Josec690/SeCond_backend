@@ -1,0 +1,3 @@
+RN01 - Aviso deve possuir título
+RN02 - Aviso deve possuir conteúdo
+RN03 - Avisos possuem data de criação automática

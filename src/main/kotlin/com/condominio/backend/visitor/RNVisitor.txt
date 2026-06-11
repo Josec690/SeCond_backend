@@ -1,0 +1,16 @@
+
+RN01
+
+Visitante deve possuir morador responsável.
+
+RN02
+
+Visitante expirado não pode entrar.
+
+RN03
+
+Prestador de serviço possui horário limite.
+
+RN04
+
+Visitante bloqueado não pode acessar.

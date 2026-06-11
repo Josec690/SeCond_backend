@@ -1,0 +1,71 @@
+package com.condominio.backend.notice
+
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
+import org.mockito.kotlin.*
+
+class NoticeServiceTest {
+
+    private val repository:
+        NoticeRepository = mock()
+
+    private val service =
+        NoticeService(repository)
+
+    // RN01 - Aviso deve possuir título
+    @Test
+    fun `deve impedir aviso sem titulo`() {
+
+        val notice =
+            Notice(
+                title = "",
+                content = "Conteúdo"
+            )
+
+        assertThrows<RuntimeException> {
+
+            service.create(notice)
+        }
+    }
+
+    // RN02 - Aviso deve possuir conteúdo
+    @Test
+    fun `deve impedir aviso sem conteudo`() {
+
+        val notice =
+            Notice(
+                title = "Aviso",
+                content = ""
+            )
+
+        assertThrows<RuntimeException> {
+
+            service.create(notice)
+        }
+    }
+
+    // RN03 - Avisos possuem data automática
+    @Test
+    fun `deve criar aviso com sucesso`() {
+
+        val notice =
+            Notice(
+                title = "Piscina interditada",
+                content = "Manutenção"
+            )
+
+        doAnswer {
+            it.arguments[0]
+        }.whenever(repository)
+            .save(any())
+
+        val result =
+            service.create(notice)
+
+        assertEquals(
+            "Piscina interditada",
+            result.title
+        )
+    }
+}
